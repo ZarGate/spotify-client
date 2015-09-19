@@ -1,0 +1,58 @@
+﻿<Window x:Class="SpotifyClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ZarGate Spotify Vote Player" Height="283.145" Width="525" Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="PlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Slider HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="221" Minimum="0" Maximum="100" Value="{ Binding Volume }"/>
+        <Label Content="Current track name:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
+        <Label Content="{ Binding CurrentTrackName }" HorizontalAlignment="Left" Margin="129,33,0,0" VerticalAlignment="Top"/>
+        <Label Content="Playback state:" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top"/>
+        <Label Content="{ Binding PlaybackState }" HorizontalAlignment="Left" Margin="114,95,0,0" VerticalAlignment="Top"/>
+        <TextBox Style="{StaticResource PlaceHolder}" Tag="Spotify URI" x:Name="TxtTrackId" HorizontalAlignment="Left" Height="23" Margin="10,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" />
+        <Button Content="Play ID" HorizontalAlignment="Left" Margin="420,126,0,0" VerticalAlignment="Top" Width="87" Height="23" Click="BtnPlayTrackIdClick"/>
+        <Button Content="Play" IsEnabled="{Binding CanPlay}" HorizontalAlignment="Left" Margin="236,10,0,0" VerticalAlignment="Top" Width="87" Click="BtnPlayClick"/>
+        <Button Content="Pause" IsEnabled="{Binding CanPause}" HorizontalAlignment="Left" Margin="328,10,0,0" VerticalAlignment="Top" Width="87" Click="BtnPauseClick"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="420,10,0,0" VerticalAlignment="Top" Width="87" Click="BtnNextClick"/>
+        <Label Content="Next track name:" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Foreground="#FF818181"/>
+        <Label Content="{Binding NextTrackName }" HorizontalAlignment="Left" Margin="129,64,0,0" VerticalAlignment="Top" Foreground="#FF818181"/>
+        <TextBox Style="{StaticResource PlaceHolder}" Tag="Webservice url" x:Name="TxtWebservice" HorizontalAlignment="Left" Height="23" Margin="10,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" />
+        <Button Content="Save" HorizontalAlignment="Left" Margin="420,210,0,0" VerticalAlignment="Top" Width="87" Height="23" Click="BtnSaveClick" />
+        <TextBox Style="{StaticResource PlaceHolder}" Tag="Spotify username" x:Name="TxtSpotifyUsername" HorizontalAlignment="Left" Height="23" Margin="10,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" />
+        <PasswordBox x:Name="TxtSpotifyPassword" HorizontalAlignment="Left" Height="23" Margin="215,210,0,0" VerticalAlignment="Top" Width="200" />
+        <CheckBox x:Name="ChkDebug" Content="Debug" HorizontalAlignment="Left" Margin="420,156,0,0" VerticalAlignment="Top" Width="87" Height="21"/>
+        <TextBox Style="{StaticResource PlaceHolder}" Tag="Webservice secret" x:Name="TxtWebserviceSecret" HorizontalAlignment="Left" Height="23" Margin="10,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" />
+
+    </Grid>
+
+</Window>
