@@ -8,12 +8,10 @@ The application has it's own volume adjuster.
 Some of this work is not ours, and is based on the [SoundBounce Spotify API]. Those guys deserve some credit as it would not be possible to create this app without their work.
 
 ### Usage
-To use this app you need a backend web service with two endpoints, e.g.:
+To use this app you need a backend web service with two endpoints with the same URL, e.g.:
    
 - POST /spotify/
 - GET /spotify/
-
-These endpoints can be changed in the code for now.
 
 #### GET
 This endpoint should return a JSON object with the property "track_id" which is a Spotify Track ID which is the next song in queue.
