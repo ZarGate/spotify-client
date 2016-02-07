@@ -8,10 +8,10 @@ The application has it's own volume adjuster.
 Some of this work is not ours, and is based on the [SoundBounce Spotify API]. Those guys deserve some credit as it would not be possible to create this app without their work.
 
 ### Usage
-To use this app you need a backend web service with two endpoints:
+To use this app you need a backend web service with two endpoints, e.g.:
    
-- POST /?method=bigScreenSpotify
-- GET /?method=bigScreenSpotify
+- POST /spotify/
+- GET /spotify/
 
 These endpoints can be changed in the code for now.
 
